@@ -2,43 +2,43 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Valentine Letter</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    
+    <link rel="stylesheet" href="style.css" />
+    
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Aldrich&family=Pixelify+Sans:wght@400..700&display=swap"
       rel="stylesheet"
     />
-    <title>Document</title>
   </head>
   <body>
-    <!-- Envelope Screen -->
     <div id="envelope-container">
       <img src="envelope.png" alt="Envelope" id="envelope" />
       <p>♡ Letter for You ♡</p>
     </div>
 
-    <!-- Letter Screen -->
     <div id="letter-container">
       <div class="letter-window">
-        <h1 id="letter-title">Will you be my Valentine?</h1>
+        <div class="content-wrapper">
+            <h1 id="letter-title">Will you be my Valentine?</h1>
 
-        <img src="cat_heart.gif" class="cat" id="letter-cat" />
+            <img src="cat_heart.gif" class="cat" id="letter-cat" />
 
-        <div class="buttons" id="letter-buttons">
-          <img src="yes.png" class="btn yes-btn" alt="Yes" />
+            <div class="buttons" id="letter-buttons">
+            <img src="yes.png" class="btn yes-btn" alt="Yes" />
 
-          <div class="no-wrapper">
-            <img src="no.png" class="btn no-btn" alt="No" />
-          </div>
+            <div class="no-wrapper">
+                <img src="no.png" class="btn no-btn" alt="No" />
+            </div>
+            </div>
+
+            <p id="final-text" class="final-text" style="display: none">
+            <strong>Valentine Date:</strong><br> Diva, Invited to Taman GBK <br> 14 February 2024
+            </p>
         </div>
-
-        <p id="final-text" class="final-text" style="display: none">
-          <strong>Valentine Date:</strong> Diva, Invited to Taman GBK, 14 February 2024 <br />
-        </p>
       </div>
     </div>
     <script src="script.js"></script>
