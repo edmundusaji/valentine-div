@@ -2,7 +2,7 @@
 const envelope = document.getElementById("envelope-container");
 const letter = document.getElementById("letter-container");
 const noBtn = document.querySelector(".no-btn");
-const yesBtn = document.querySelector(".yes-btn");
+const yesBtn = document.querySelector(".yes-btn"); // Note: Make sure class in HTML is .yes-btn
 
 const title = document.getElementById("letter-title");
 const catImg = document.getElementById("letter-cat");
@@ -22,38 +22,76 @@ envelope.addEventListener("click", () => {
 // --- LOGIC TO MOVE THE NO BUTTON (MOBILE COMPATIBLE) ---
 
 function moveNoButton() {
-    // 1. Get the window width/height to know boundaries
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
     
-    // 2. Define a safe area so it doesn't go off screen
-    // We limit movement to 80% of the screen size
+    // Limit movement to inside the screen
     const randomX = Math.random() * (windowWidth * 0.6) - (windowWidth * 0.3);
     const randomY = Math.random() * (windowHeight * 0.6) - (windowHeight * 0.3);
 
-    // 3. Apply the move
-    // We switch to 'fixed' position so it breaks out of the layout and moves freely
     noBtn.style.position = "fixed"; 
-    noBtn.style.left = "50%"; // Reset to center relative
+    // We use center of screen as the anchor, then move from there
+    noBtn.style.left = "50%"; 
     noBtn.style.top = "50%";
     noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
 }
 
-// Add 'mouseover' for Desktop (PC)
+// Desktop hover
 noBtn.addEventListener("mouseover", moveNoButton);
 
-// Add 'touchstart' for Mobile (Phones)
-// 'touchstart' happens the moment a finger touches the screen
+// Mobile touch
 noBtn.addEventListener("touchstart", (e) => {
-    e.preventDefault(); // Prevents the button from actually being clicked
+    e.preventDefault();
     moveNoButton();
 });
 
-// Add 'click' just in case
+// Click fallback
 noBtn.addEventListener("click", (e) => {
     e.preventDefault();
     moveNoButton();
 });
+
+
+// --- NEW FUNCTION: CREATE FALLING FLOWERS (LOCAL) ---
+function createFallingFlowers() {
+    const numberOfFlowers = 30; // Number of lilies
+
+    for (let i = 0; i < numberOfFlowers; i++) {
+        const flower = document.createElement('img');
+        
+        // --- CHANGE IS HERE ---
+        // Now it uses your local file
+        flower.src = "lily.png"; 
+        
+        flower.classList.add('falling-flower');
+
+        // Randomize Position
+        flower.style.left = Math.random() * 100 + 'vw';
+        flower.style.top = -50 + 'px';
+
+        // Randomize Size 
+        const size = Math.random() * 40 + 30; // Between 30px and 70px
+        flower.style.width = size + 'px';
+        flower.style.height = 'auto';
+
+        // Randomize Falling Speed 
+        const duration = Math.random() * 3 + 2; // Between 2s and 5s
+        
+        // Randomize Delay 
+        const delay = Math.random() * 2;
+        
+        // Apply the animation defined in CSS
+        flower.style.animation = `fall ${duration}s linear ${delay}s forwards`;
+
+        document.body.appendChild(flower);
+
+        // Cleanup after animation
+        setTimeout(() => {
+            flower.remove();
+        }, (duration + delay) * 1000 + 100);
+    }
+}
+
 
 // --- YES BUTTON LOGIC ---
 
@@ -63,7 +101,6 @@ yesBtn.addEventListener("click", () => {
     // Change Cat Image
     catImg.src = "cat_dance.gif"; 
 
-    // Add class for styling
     document.querySelector(".letter-window").classList.add("final");
 
     // Hide Buttons
@@ -71,4 +108,7 @@ yesBtn.addEventListener("click", () => {
 
     // Show Final Text
     finalTextView.style.display = "block";
+
+    // TRIGGER THE FALLING LILIES!
+    createFallingFlowers();
 });
